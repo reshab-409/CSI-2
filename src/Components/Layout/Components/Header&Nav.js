@@ -53,14 +53,6 @@ const closedMixin = (theme) => ({
     },
 });
 
-const DrawerHeader = styled('div')(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-}));
 
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
@@ -184,10 +176,10 @@ export default function NavDrawer() {
         <>
 
             {/* NavBar  */}
-            <AppBar  position="fixed" >
+            <AppBar position="fixed" >
                 <Toolbar disableGutters>
                     <Box sx={{ ml: 2 }}>
-                        <IconButton
+                        {!open && <IconButton
                             size="large"
                             aria-label="account of current user"
                             aria-controls="menu-appbar"
@@ -196,9 +188,10 @@ export default function NavDrawer() {
                             color="inherit"
                         >
                             <MenuIcon />
-                        </IconButton>
+                        </IconButton>}
+                        {open && <ChevronLeftIcon onClick={handleDrawerClose} />}
                     </Box>
-                    <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color:"inherit" }} />
+                    <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, color: "inherit" }} />
                     <Typography
                         variant="h6"
                         noWrap
@@ -210,7 +203,7 @@ export default function NavDrawer() {
                             fontFamily: 'monospace',
                             fontWeight: 700,
                             letterSpacing: '.3rem',
-                            color:"inherit",
+                            color: "inherit",
                             textDecoration: 'none',
                         }}
                     >
@@ -285,24 +278,9 @@ export default function NavDrawer() {
                 <Drawer
                     variant="permanent"
                     open={open}
-                    >
-
-                    <DrawerHeader>
-
-                        <ChevronLeftIcon sx={{ paddingRight: "50px", marginTop: "80px" }} onClick={handleDrawerClose} />
-
-                    </DrawerHeader>
+                >
                     <Toolbar />
-                    <List
-                    // sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
-                    // component="nav"
-                    // aria-labelledby="nested-list-subheader"
-                    // subheader={
-                    // <ListSubheader component="div" id="nested-list-subheader">
-                    //     Nested List Items
-                    // </ListSubheader>
-                    // }
-                    >
+                    <List>
                         <ListItemButton onClick={handleClick}>
                             <ListItemIcon>
                                 <InboxIcon />
@@ -320,7 +298,6 @@ export default function NavDrawer() {
                                 </ListItemButton>
                             </List>
                         </Collapse>
-
 
                         <ListItemButton onClick={handleClick1}>
                             <ListItemIcon>
@@ -340,7 +317,6 @@ export default function NavDrawer() {
                             </List>
                         </Collapse>
 
-
                         <ListItemButton onClick={handleClick2}>
                             <ListItemIcon>
                                 <InboxIcon />
@@ -359,7 +335,6 @@ export default function NavDrawer() {
                             </List>
                         </Collapse>
 
-
                         <ListItemButton onClick={handleClick3}>
                             <ListItemIcon>
                                 <InboxIcon />
@@ -377,7 +352,6 @@ export default function NavDrawer() {
                                 </ListItemButton>
                             </List>
                         </Collapse>
-
 
                         <ListItemButton onClick={handleClick4}>
                             <ListItemIcon>
@@ -459,7 +433,6 @@ export default function NavDrawer() {
                             </List>
                         </Collapse>
 
-
                         <ListItemButton onClick={handleClick8}>
                             <ListItemIcon>
                                 <InboxIcon />
@@ -477,8 +450,6 @@ export default function NavDrawer() {
                                 </ListItemButton>
                             </List>
                         </Collapse>
-
-
 
                         <ListItemButton onClick={handleClick9}>
                             <ListItemIcon>
@@ -504,11 +475,9 @@ export default function NavDrawer() {
                             </ListItemIcon>
                             <ListItemText primary="Report" />
                         </ListItemButton>
-
                     </List>
                 </Drawer>
             </Box>
-
         </>
     );
 };
