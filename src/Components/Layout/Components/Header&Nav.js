@@ -26,6 +26,7 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import StarBorder from '@mui/icons-material/StarBorder';
 import { authActions } from '../../Store/Auth-Slice';
 import ReportGmailerrorredIcon from '@mui/icons-material/ReportGmailerrorred';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -98,6 +99,7 @@ export default function NavDrawer() {
     const Logout = () => {
         dispatch(authActions.Logout());
         window.localStorage.removeItem("IniIn");
+        navigate("/");
     };
 
 
@@ -126,6 +128,8 @@ export default function NavDrawer() {
         setOpen(false);
     };
 
+    const navigate = useNavigate();
+
     const [open1, setOpen1] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
     const [open3, setOpen3] = React.useState(false);
@@ -142,7 +146,6 @@ export default function NavDrawer() {
     const handleClick = () => {
         setOpen1(!open1);
     };
-
     const handleClick1 = () => {
         setOpen2(!open2);
     };
@@ -171,12 +174,23 @@ export default function NavDrawer() {
     const handleClick9 = () => {
         setOpen10(!open10);
     };
-
+    // CBM onclick event
+    const Goto = () => {
+        navigate("/CompanyBankMaster")
+    };
+    const Goto1 = () => {
+        navigate("/CompanyMaster")
+    };
+    const Goto2 = () => {
+        navigate("/CustomerMaster")
+    };
+    const Goto3 = () => {
+        navigate("/ProductMaster")
+    };
     return (
         <>
-
             {/* NavBar  */}
-            <AppBar position="fixed" >
+            <AppBar position="fixed" color='secondary'>
                 <Toolbar disableGutters>
                     <Box sx={{ ml: 2 }}>
                         {!open && <IconButton
@@ -196,7 +210,6 @@ export default function NavDrawer() {
                         variant="h6"
                         noWrap
                         component="a"
-                        // onClick={handleDrawerOpen}
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
@@ -216,8 +229,6 @@ export default function NavDrawer() {
                         variant="h5"
                         noWrap
                         component="a"
-                        // href=""
-                        // onClick={handleDrawerOpen}
                         sx={{
                             mr: 2,
                             display: { xs: 'flex', md: 'none' },
@@ -274,6 +285,7 @@ export default function NavDrawer() {
             </AppBar>
 
             {/* drawer */}
+
             <Box>
                 <Drawer
                     variant="permanent"
@@ -290,12 +302,58 @@ export default function NavDrawer() {
                         </ListItemButton>
                         <Collapse in={open1} timeout="auto" unmountOnExit>
                             <List component="div" disablePadding>
+
+                                {/* Master modules  */}
+                                <ListItemButton sx={{ pl: 4 }} onClick={Goto1}>
+                                    <ListItemIcon>
+                                        <StarBorder />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Company Master" />
+                                </ListItemButton>
+                                <ListItemButton sx={{ pl: 4 }} onClick={Goto}>
+                                    <ListItemIcon>
+                                        <StarBorder />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Company Bank Master" />
+                                </ListItemButton>
+                                <ListItemButton sx={{ pl: 4 }} onClick={Goto2}>
+                                    <ListItemIcon>
+                                        <StarBorder />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Customer Master" />
+                                </ListItemButton>
                                 <ListItemButton sx={{ pl: 4 }}>
                                     <ListItemIcon>
                                         <StarBorder />
                                     </ListItemIcon>
-                                    <ListItemText primary="Starred" />
+                                    <ListItemText primary="Vendor Master" />
                                 </ListItemButton>
+                                <ListItemButton sx={{ pl: 4 }}  onClick={Goto3} >
+                                    <ListItemIcon>
+                                        <StarBorder />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Product Master" />
+                                </ListItemButton>
+                                <ListItemButton sx={{ pl: 4 }}>
+                                    <ListItemIcon>
+                                        <StarBorder />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Raw Material Master" />
+                                </ListItemButton>
+                                <ListItemButton sx={{ pl: 4 }}>
+                                    <ListItemIcon>
+                                        <StarBorder />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Godown Master" />
+                                </ListItemButton>
+                                <ListItemButton sx={{ pl: 4 }}>
+                                    <ListItemIcon>
+                                        <StarBorder />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Production Unit Master" />
+                                </ListItemButton>
+
+
                             </List>
                         </Collapse>
 
@@ -312,7 +370,19 @@ export default function NavDrawer() {
                                     <ListItemIcon>
                                         <StarBorder />
                                     </ListItemIcon>
-                                    <ListItemText primary="Starred" />
+                                    <ListItemText primary="Stock" />
+                                </ListItemButton>
+                                <ListItemButton sx={{ pl: 4 }}>
+                                    <ListItemIcon>
+                                        <StarBorder />
+                                    </ListItemIcon>
+                                    <ListItemText primary="On Hold Stock" />
+                                </ListItemButton>
+                                <ListItemButton sx={{ pl: 4 }}>
+                                    <ListItemIcon>
+                                        <StarBorder />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Production Stock" />
                                 </ListItemButton>
                             </List>
                         </Collapse>
@@ -468,6 +538,8 @@ export default function NavDrawer() {
                                 </ListItemButton>
                             </List>
                         </Collapse>
+
+                        <Divider />
 
                         <ListItemButton>
                             <ListItemIcon>
