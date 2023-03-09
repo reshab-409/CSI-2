@@ -1,4 +1,4 @@
-import { Box, Button, Card, Typography } from '@mui/material'
+import { Box, Button, Card, MenuItem, Typography } from '@mui/material'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate, useParams } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
@@ -8,6 +8,19 @@ import axios from 'axios';
 
 const ProductUpdate = () => {
     const { id } = useParams();
+
+
+
+    const Unit = [
+        {
+            value: 'Box',
+            label: 'Box',
+        },
+        {
+            value: 'Piece',
+            label: 'Piece',
+        }
+    ];
 
     const [ProductEdit, setProductEdit] = useState({ userId: '', body: '', title: '' })
     const [msg, setMsg] = useState('');
@@ -44,32 +57,47 @@ const ProductUpdate = () => {
     };
 
     return (
-        <Box sx={{ display: "flex", height: "100vh", width: "100vw", justifyContent: "center", backgroundColor: "#eee" }}>
-            <Card sx={{ display: "flex", flexDirection: "column", textAlign: "center", marginTop: "100px", width: "1100px", height: "500px", boxShadow: "0 15px 30px rgba(0, 0, 0, 0.1)" }}>
-                <Button sx={{ mr: 120, p: 1 }} variant="contained" onClick={goBack}><ArrowBackIcon /> Go back</Button>
-                <Box sx={{ margin: "50px 0 0" }}>
-                    <Typography variant='h3'>Update your Product details here</Typography>
+        <Box sx={{ display: "flex", justifyContent: "center", marginLeft: "62px" }}>
+            <Card sx={{ display: "flex", flexDirection: "column", textAlign: "center", marginTop: "100px", width: "75vw", boxShadow: "0 15px 30px rgba(0, 0, 0, 0.1)" }}>
+                <Button sx={{ width: "120px", height: "30px" }} variant="contained" onClick={goBack}><ArrowBackIcon fontSize='small' /> Go back</Button>
+                <Box sx={{ p: 1 }}>
+                    <Typography sx={{ fontSize: { xs: 15, sm: 25, md: 25, lg: 30, xl: 35 } }}>Update your Product details here</Typography>
                 </Box>
 
                 <Form onSubmit={handleProductUpdate}>
                     <Box
                         // component="form"
                         sx={{
-                            p: 5,
-                            '& > :not(style)': { m: 1, width: '25ch' },
+                            '& > :not(style)': { m: 1, width: { xs: 125, sm: 130, md: 150, lg: 180, xl: 200, } },
                         }}
                         noValidate
                         autoComplete="off"
                     >
 
-                        <TextField id="userId" label="Name" onChange={(e) => handleEdit(e)} required={true} variant="outlined" value={ProductEdit.userId} />
-                        <TextField id="title" label="Branch" onChange={(e) => handleEdit(e)} required={true} variant="outlined" value={ProductEdit.title} />
-                        <TextField id="body" label="Account Holder" onChange={(e) => handleEdit(e)} required={true} variant="outlined" value={ProductEdit.body} />
-                        <TextField id="userId" label="Account Number" onChange={(e) => handleEdit(e)} required={true} variant="outlined" value={ProductEdit.userId} />
-                        <TextField id="title" label="Address" onChange={(e) => handleEdit(e)} required={true} variant="outlined" value={ProductEdit.title} />
-                        <TextField id="body" label="Branch Code" onChange={(e) => handleEdit(e)} required={true} variant="outlined" value={ProductEdit.body} />
-                        <TextField id="userId" label="IFSC Code" onChange={(e) => handleEdit(e)} required={true} variant="outlined" value={ProductEdit.userId} />
-                        <TextField id="title" label="Swift" onChange={(e) => handleEdit(e)} required={true} variant="outlined" value={ProductEdit.title} />
+                        <TextField id="Product Type" label="Product Type" size="small" onChange={(e) => handleEdit(e)} required={true} variant="outlined" />
+                        <TextField id="Product Name" label="Product Name" size="small" onChange={(e) => handleEdit(e)} required={true} variant="outlined" />
+                        <TextField id="Stock" size="small" label="Stock" onChange={(e) => handleEdit(e)} required={true} variant="outlined" />
+                        <TextField
+                            id="Unit"
+                            select
+                            size="small"
+                            label="Unit"
+                            defaultValue="Box"
+                            helperText="Please select Unit"
+                        >
+                            {Unit.map((option) => (
+                                <MenuItem key={option.value} value={option.value}>
+                                    {option.label}
+                                </MenuItem>
+                            ))}
+                        </TextField>
+                        <TextField id="Place/Box" size="small" label="Place/Box" onChange={(e) => handleEdit(e)} required={true} variant="outlined" />
+                        <TextField id="sale Price" size="small" label="Sale Price" onChange={(e) => handleEdit(e)} required={true} variant="outlined" />
+                        <TextField id="Description" size="small" label="Description" onChange={(e) => handleEdit(e)} required={true} multiline maxRows={4} variant="outlined" />
+                        <TextField id="HSN Code" size="small" label="HSN Code" onChange={(e) => handleEdit(e)} required={true} variant="outlined" />
+                        <TextField id="GST Percentage" size="small" label="GST Percentage" onChange={(e) => handleEdit(e)} required={true} variant="outlined" />
+                        <TextField id="Purchase Rate" size="small" label="Purchase Rate" onChange={(e) => handleEdit(e)} required={true} variant="outlined" />
+                        <TextField id="Common Disc%" size="small" label="Common Disc%" onChange={(e) => handleEdit(e)} required={true} variant="outlined" />
 
 
                     </Box>

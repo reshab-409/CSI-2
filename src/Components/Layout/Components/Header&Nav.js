@@ -187,6 +187,18 @@ export default function NavDrawer() {
     const Goto3 = () => {
         navigate("/ProductMaster")
     };
+    const Goto4 = () => {
+        navigate("/VendorMaster")
+    };
+    const Goto5 = () => {
+        navigate("/RawMaterialMaster")
+    };
+    const Goto6 = () => {
+        navigate("/GoDownMaster")
+    };
+    const Goto7 = () => {
+        navigate("/ProductionUnitMaster")
+    };
     return (
         <>
             {/* NavBar  */}
@@ -322,7 +334,7 @@ export default function NavDrawer() {
                                     </ListItemIcon>
                                     <ListItemText primary="Customer Master" />
                                 </ListItemButton>
-                                <ListItemButton sx={{ pl: 4 }}>
+                                <ListItemButton sx={{ pl: 4 }} onClick={Goto4}>
                                     <ListItemIcon>
                                         <StarBorder />
                                     </ListItemIcon>
@@ -334,19 +346,19 @@ export default function NavDrawer() {
                                     </ListItemIcon>
                                     <ListItemText primary="Product Master" />
                                 </ListItemButton>
-                                <ListItemButton sx={{ pl: 4 }}>
+                                <ListItemButton sx={{ pl: 4 }} onClick={Goto5}>
                                     <ListItemIcon>
                                         <StarBorder />
                                     </ListItemIcon>
                                     <ListItemText primary="Raw Material Master" />
                                 </ListItemButton>
-                                <ListItemButton sx={{ pl: 4 }}>
+                                <ListItemButton sx={{ pl: 4 }} onClick={Goto6}>
                                     <ListItemIcon>
                                         <StarBorder />
                                     </ListItemIcon>
                                     <ListItemText primary="Godown Master" />
                                 </ListItemButton>
-                                <ListItemButton sx={{ pl: 4 }}>
+                                <ListItemButton sx={{ pl: 4 }} onClick={Goto7}>
                                     <ListItemIcon>
                                         <StarBorder />
                                     </ListItemIcon>

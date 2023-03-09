@@ -2,15 +2,16 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import CreateIcon from '@mui/icons-material/Create';
-import { Button, Card, MenuItem, Typography } from '@mui/material'
+import { Button, Card, Typography } from '@mui/material'
 import { Link, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
 import { Form } from 'semantic-ui-react';
 import axios from 'axios';
-import dayjs from 'dayjs';
+
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -45,84 +46,71 @@ function a11yProps(index) {
     };
 }
 
-
-const Unit = [
-    {
-        value: 'Box',
-        label: 'Box',
-    },
-    {
-        value: 'Piece',
-        label: 'Piece',
-    }
-];
-
-
 const columns = [
     {
         field: 'id',
         headerName: 'ID',
-        width: 20,
+        width: 40,
         type: 'number'
     },
     {
-        field: 'ProductName',
-        headerName: 'Product Name',
-        width: 300,
-        type: 'number'
-    },
-    {
-        field: 'Description',
-        headerName: 'Product Description',
+        field: 'Name',
+        headerName: 'Name',
         width: 150,
         type: 'number',
         editable: false
     },
     {
-        field: 'HSN/SAC',
-        headerName: 'HSN/SAC',
+        field: 'Contact Person',
+        headerName: 'Contact Person',
         width: 150,
         editable: false
     },
     {
-        field: 'GST%',
-        headerName: 'GST%',
+        field: 'CP Phone No',
+        headerName: 'CP Phone No',
         width: 150,
         editable: false
     },
     {
-        field: 'Purchase Rate',
-        headerName: 'Purchase Rate',
+        field: 'Address',
+        headerName: 'Address',
         width: 150,
         editable: false
     },
     {
-        field: 'Sale Price',
-        headerName: 'Sale Price',
+        field: 'Phone No',
+        headerName: 'Phone No',
         width: 150,
         editable: false
     },
     {
-        field: 'C. Disc%',
-        headerName: 'C. Disc%',
+        field: 'E-Mail',
+        headerName: 'E-Mail',
         width: 150,
         editable: false
     },
     {
-        field: 'Stock',
-        headerName: 'Stock',
+        field: 'GESTIN',
+        headerName: 'GSTIN',
         width: 150,
         editable: false
     },
     {
-        field: 'Unit',
-        headerName: 'Unit',
+        field: 'PAN No',
+        headerName: 'PAN No',
         width: 150,
         editable: false
     },
     {
-        field: 'Pieces/Unit',
-        headerName: 'Pieces/Unit',
+        field: 'Website',
+        headerName: 'Website',
+        width: 150,
+        editable: false
+    },
+    {
+        field: 'Toll Free No',
+        headerName: 'Toll Free No',
         width: 150,
         editable: false
     },
@@ -133,7 +121,7 @@ const columns = [
         renderCell: ({ row }) => (
             <Box sx={{ display: "flex" }}>
 
-                <Link to={`/EditProduct/${row.id}`}> <Button><CreateIcon sx={{ mr: 2, cursor: "pointer", color: "grey" }} /></Button></Link>
+                <Link to={`/EditVendor/${row.id}`}> <Button><CreateIcon sx={{ mr: 2, cursor: "pointer", color: "grey" }} /></Button></Link>
 
             </Box>
         )
@@ -142,7 +130,7 @@ const columns = [
 
 
 
-export default function ProductMaster() {
+export default function VendorMaster() {
     const { id } = useParams();
     const [value, setValue] = React.useState(0);
 
@@ -150,40 +138,33 @@ export default function ProductMaster() {
         setValue(newValue);
     };
 
-    const [ProductData, setProductData] = React.useState([]);
+    const [Vendordata, setVendordata] = React.useState([]);
 
-    // GET API for Customer data
+    // GET API for Vendor data
     React.useEffect(() => {
         fetch("https://jsonplaceholder.typicode.com/posts")
             .then((data) => data.json())
-            .then((data) => setProductData(data))
+            .then((data) => setVendordata(data))
     })
 
 
 
-    // post API for Add customer
-    const [AddProduct, setAddProduct] = React.useState("")
+    // post API for Add Vendor
+    const [AddUser, setAddUser] = React.useState("")
     const [msg, setMsg] = React.useState('');
 
     const handleEdit = (e) => {
-        setAddProduct({ ...AddProduct, [e.target.id]: e.target.value });
+        setAddUser({ ...AddUser, [e.target.id]: e.target.value });
     };
 
-    const handleCustomerAdd = async (e) => {
+    const handleVendorAdd = async (e) => {
         e.preventDefault();
-        console.log(AddProduct)
-        const responce = await axios.post("https://jsonplaceholder.typicode.com/posts", AddProduct);
+        console.log(AddUser)
+        const responce = await axios.post("https://jsonplaceholder.typicode.com/posts", AddUser);
 
         setMsg(responce.data.msg);
     };
 
-
-
-    // date picker
-    const [value1, setValue1] = React.useState(dayjs('2014-08-18T21:11:54'));
-    const handleTime = (newValue) => {
-        setValue1(newValue);
-    };
 
 
     return (
@@ -191,19 +172,19 @@ export default function ProductMaster() {
             <Box sx={{ display: "flex", justifyContent: "center", width: '100%' }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                        <Tab label="Product List" {...a11yProps(0)} />
-                        <Tab label="Add New Product" {...a11yProps(1)} />
+                        <Tab label="Vendor List" {...a11yProps(0)} />
+                        <Tab label="Add New Vendor" {...a11yProps(1)} />
                     </Tabs>
                 </Box>
             </Box>
             <TabPanel value={value} index={0}>
-                <Typography sx={{ fontSize: { xs: 15, sm: 25, md: 25, lg: 30, xl: 35 }, p: 1 }}>Product List</Typography>
-                {/* customer list */}
+                <Typography sx={{ fontSize: { xs: 15, sm: 25, md: 25, lg: 30, xl: 35 }, p: 1 }}>Vendor List</Typography>
+                {/* Vendor list */}
                 <Box sx={{ display: "flex", justifyContent: "center" }}>
                     <Box sx={{ height: 425, width: '82%' }}>
                         <DataGrid
                             sx={{ backgroundColor: "#eee" }}
-                            rows={ProductData}
+                            rows={Vendordata}
                             columns={columns}
                             pageSize={6}
                             rowsPerPageOptions={[6]}
@@ -216,16 +197,16 @@ export default function ProductMaster() {
             </TabPanel>
             <TabPanel value={value} index={1}>
 
-                {/* customer addition part */}
+                {/* Vendor addition part */}
 
                 <Box sx={{ display: "flex", height: "100%", width: "100%", justifyContent: "center" }}>
                     <Card sx={{ display: "flex", flexDirection: "column", justifyContent: "center", boxShadow: "0 15px 30px rgba(0, 0, 0, 0.1)" }}>
                         <Box sx={{ p: 1 }}>
-                            <Typography sx={{ fontSize: { xs: 15, sm: 25, md: 25, lg: 30, xl: 35 } }}>Add New Product</Typography>
+                            <Typography sx={{ fontSize: { xs: 15, sm: 25, md: 25, lg: 30, xl: 35 } }}>Add New Vendor</Typography>
                         </Box>
 
 
-                        <Form onSubmit={handleCustomerAdd}>
+                        <Form onSubmit={handleVendorAdd}>
                             <Box
                                 sx={{
                                     '& > :not(style)': { m: 1, width: { xs: 125, sm: 130, md: 150, lg: 180, xl: 200, } },
@@ -233,28 +214,20 @@ export default function ProductMaster() {
                                 noValidate
                                 autoComplete="off"
                             >
-                                <TextField id="Product Type" onChange={(e) => handleEdit(e)} required={true}  size="small" label="Product Type *" variant="outlined" />
-                                <TextField id="Product Name" onChange={(e) => handleEdit(e)} required={true}  size="small" label="Product Name *" variant="outlined" />
-                                <TextField id="Stock" onChange={(e) => handleEdit(e)} required={true}  size="small" label="Stock *" variant="outlined" />
-                                <TextField
-                                    id="Unit"
-                                    select
-                                    size="small"
-                                    label="Unit"
-                                    defaultValue="Box"
-                                    helperText="Please select Unit"
-                                >
-                                    {Unit.map((option) => (
-                                        <MenuItem key={option.value} value={option.value}>
-                                            {option.label}
-                                        </MenuItem>
-                                    ))}
-                                </TextField>
-                                <TextField id="Box/Piece" onChange={(e) => handleEdit(e)} required={true} label=" Box/Piece *"  size="small" variant="outlined" />
-                                <TextField id="Description" onChange={(e) => handleEdit(e)} required={true} multiline maxRows={4} label="Description *"  size="small" variant="outlined" />
-                                <TextField id="HSN" onChange={(e) => handleEdit(e)} required={true} label="HSN Code *"  size="small" variant="outlined" />
-                                <TextField id="GST Percentage" onChange={(e) => handleEdit(e)} required={true} label="GST Percentage % *"  size="small" variant="outlined" />
-                                <TextField id="Common Disc%" onChange={(e) => handleEdit(e)} required={true} label="Common Disc %"  size="small" variant="outlined" />
+
+                                <TextField id="Vendor Name"  size="small" onChange={(e) => handleEdit(e)} required={true} label="Vendor Name *" variant="outlined" />
+                                <TextField id="Contact Person"  size="small" onChange={(e) => handleEdit(e)} required={true} label="Contact Person" variant="outlined" />
+                                <TextField id="CP Phone Number"  size="small" onChange={(e) => handleEdit(e)} required={true} InputProps={{ startAdornment: <InputAdornment position="start">+ 91</InputAdornment>, }} label="CP Phone Number" variant="outlined" />
+                                <TextField id="Address"  size="small" onChange={(e) => handleEdit(e)} required={true} label="Address" variant="outlined" />
+                                <TextField id="Phone No"  size="small" onChange={(e) => handleEdit(e)} label="Phone No" variant="outlined" />
+                                <TextField id="E-mail"  size="small" onChange={(e) => handleEdit(e)} required={true} label="E-mail" variant="outlined" />
+                                <TextField id="GSTIN No"  size="small" onChange={(e) => handleEdit(e)} required={true} label="GSTIN No" variant="outlined" />
+                                <TextField id="PAN No"  size="small" onChange={(e) => handleEdit(e)} required={true} label="PAN No" variant="outlined" />
+                                <TextField id="Website"  size="small" onChange={(e) => handleEdit(e)} required={true} label="Website" variant="outlined" />
+                                <TextField id="Shipping Address"  size="small" onChange={(e) => handleEdit(e)} required={true} label="Shipping Address" variant="outlined" />
+
+
+
                             </Box>
 
                             <Button variant='contained' type="submit">Add</Button>
@@ -267,4 +240,5 @@ export default function ProductMaster() {
         </Box>
     );
 }
+
 

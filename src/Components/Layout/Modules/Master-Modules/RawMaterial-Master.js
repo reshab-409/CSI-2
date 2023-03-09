@@ -8,9 +8,10 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
 import { Form } from 'semantic-ui-react';
 import axios from 'axios';
-import dayjs from 'dayjs';
+
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -44,6 +45,7 @@ function a11yProps(index) {
         'aria-controls': `simple-tabpanel-${index}`,
     };
 }
+
 
 
 const Unit = [
@@ -133,7 +135,7 @@ const columns = [
         renderCell: ({ row }) => (
             <Box sx={{ display: "flex" }}>
 
-                <Link to={`/EditProduct/${row.id}`}> <Button><CreateIcon sx={{ mr: 2, cursor: "pointer", color: "grey" }} /></Button></Link>
+                <Link to={`/EditRawMaterial/${row.id}`}> <Button><CreateIcon sx={{ mr: 2, cursor: "pointer", color: "grey" }} /></Button></Link>
 
             </Box>
         )
@@ -142,7 +144,7 @@ const columns = [
 
 
 
-export default function ProductMaster() {
+export default function RawMaterialMaster() {
     const { id } = useParams();
     const [value, setValue] = React.useState(0);
 
@@ -150,40 +152,33 @@ export default function ProductMaster() {
         setValue(newValue);
     };
 
-    const [ProductData, setProductData] = React.useState([]);
+    const [RawMaterialdata, setRawMaterialdata] = React.useState([]);
 
-    // GET API for Customer data
+    // GET API for RawMaterial data
     React.useEffect(() => {
         fetch("https://jsonplaceholder.typicode.com/posts")
             .then((data) => data.json())
-            .then((data) => setProductData(data))
+            .then((data) => setRawMaterialdata(data))
     })
 
 
 
-    // post API for Add customer
-    const [AddProduct, setAddProduct] = React.useState("")
+    // post API for Add RawMaterial
+    const [RawMaterial, setRawMaterial] = React.useState("")
     const [msg, setMsg] = React.useState('');
 
     const handleEdit = (e) => {
-        setAddProduct({ ...AddProduct, [e.target.id]: e.target.value });
+        setRawMaterial({ ...RawMaterial, [e.target.id]: e.target.value });
     };
 
-    const handleCustomerAdd = async (e) => {
+    const handleRawMaterialAdd = async (e) => {
         e.preventDefault();
-        console.log(AddProduct)
-        const responce = await axios.post("https://jsonplaceholder.typicode.com/posts", AddProduct);
+        console.log(RawMaterial)
+        const responce = await axios.post("https://jsonplaceholder.typicode.com/posts", RawMaterial);
 
         setMsg(responce.data.msg);
     };
 
-
-
-    // date picker
-    const [value1, setValue1] = React.useState(dayjs('2014-08-18T21:11:54'));
-    const handleTime = (newValue) => {
-        setValue1(newValue);
-    };
 
 
     return (
@@ -191,19 +186,19 @@ export default function ProductMaster() {
             <Box sx={{ display: "flex", justifyContent: "center", width: '100%' }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                        <Tab label="Product List" {...a11yProps(0)} />
-                        <Tab label="Add New Product" {...a11yProps(1)} />
+                        <Tab label="RawMaterial List" {...a11yProps(0)} />
+                        <Tab label="Add New RawMaterial" {...a11yProps(1)} />
                     </Tabs>
                 </Box>
             </Box>
             <TabPanel value={value} index={0}>
-                <Typography sx={{ fontSize: { xs: 15, sm: 25, md: 25, lg: 30, xl: 35 }, p: 1 }}>Product List</Typography>
-                {/* customer list */}
+                <Typography sx={{ fontSize: { xs: 15, sm: 25, md: 25, lg: 30, xl: 35 }, p: 1 }}>RawMaterial List</Typography>
+                {/* RawMaterial list */}
                 <Box sx={{ display: "flex", justifyContent: "center" }}>
                     <Box sx={{ height: 425, width: '82%' }}>
                         <DataGrid
                             sx={{ backgroundColor: "#eee" }}
-                            rows={ProductData}
+                            rows={RawMaterialdata}
                             columns={columns}
                             pageSize={6}
                             rowsPerPageOptions={[6]}
@@ -216,16 +211,16 @@ export default function ProductMaster() {
             </TabPanel>
             <TabPanel value={value} index={1}>
 
-                {/* customer addition part */}
+                {/* RawMaterial addition part */}
 
                 <Box sx={{ display: "flex", height: "100%", width: "100%", justifyContent: "center" }}>
                     <Card sx={{ display: "flex", flexDirection: "column", justifyContent: "center", boxShadow: "0 15px 30px rgba(0, 0, 0, 0.1)" }}>
                         <Box sx={{ p: 1 }}>
-                            <Typography sx={{ fontSize: { xs: 15, sm: 25, md: 25, lg: 30, xl: 35 } }}>Add New Product</Typography>
+                            <Typography sx={{ fontSize: { xs: 15, sm: 25, md: 25, lg: 30, xl: 35 } }}>Add New RawMaterial</Typography>
                         </Box>
 
 
-                        <Form onSubmit={handleCustomerAdd}>
+                        <Form onSubmit={handleRawMaterialAdd}>
                             <Box
                                 sx={{
                                     '& > :not(style)': { m: 1, width: { xs: 125, sm: 130, md: 150, lg: 180, xl: 200, } },
@@ -233,6 +228,7 @@ export default function ProductMaster() {
                                 noValidate
                                 autoComplete="off"
                             >
+
                                 <TextField id="Product Type" onChange={(e) => handleEdit(e)} required={true}  size="small" label="Product Type *" variant="outlined" />
                                 <TextField id="Product Name" onChange={(e) => handleEdit(e)} required={true}  size="small" label="Product Name *" variant="outlined" />
                                 <TextField id="Stock" onChange={(e) => handleEdit(e)} required={true}  size="small" label="Stock *" variant="outlined" />
@@ -250,11 +246,12 @@ export default function ProductMaster() {
                                         </MenuItem>
                                     ))}
                                 </TextField>
-                                <TextField id="Box/Piece" onChange={(e) => handleEdit(e)} required={true} label=" Box/Piece *"  size="small" variant="outlined" />
-                                <TextField id="Description" onChange={(e) => handleEdit(e)} required={true} multiline maxRows={4} label="Description *"  size="small" variant="outlined" />
-                                <TextField id="HSN" onChange={(e) => handleEdit(e)} required={true} label="HSN Code *"  size="small" variant="outlined" />
+                                <TextField id="Box/Piece" onChange={(e) => handleEdit(e)} required={true}  size="small" label=" Box/Piece *" variant="outlined" />
+                                <TextField id="Description" onChange={(e) => handleEdit(e)} required={true}  size="small" multiline maxRows={4} label="Description *" variant="outlined" />
+                                <TextField id="HSN" onChange={(e) => handleEdit(e)} required={true} label="HSN Code *"  size="small"  variant="outlined" />
                                 <TextField id="GST Percentage" onChange={(e) => handleEdit(e)} required={true} label="GST Percentage % *"  size="small" variant="outlined" />
                                 <TextField id="Common Disc%" onChange={(e) => handleEdit(e)} required={true} label="Common Disc %"  size="small" variant="outlined" />
+
                             </Box>
 
                             <Button variant='contained' type="submit">Add</Button>
@@ -267,4 +264,9 @@ export default function ProductMaster() {
         </Box>
     );
 }
+
+
+
+
+
 

@@ -40,46 +40,47 @@ const BankUpdate = () => {
 
     //  goto previous page function
     const navigate = useNavigate();
-	const goBack = () => {
-		navigate(-1);
-	}
+    const goBack = () => {
+        navigate(-1);
+    }
 
     return (
-        <Box sx={{ display: "flex", height: "100vh", width: "100vw", justifyContent: "center", backgroundColor: "#eee" }}>
-            <Card sx={{ display: "flex", flexDirection: "column", textAlign: "center", marginTop: "100px", width: "1100px", height: "500px", boxShadow: "0 15px 30px rgba(0, 0, 0, 0.1)" }}>
-            <Button sx={{mr:120,p:1}} variant="contained" onClick={goBack}><ArrowBackIcon/> Go back</Button>
+        <Box sx={{ height: "100vh", width: "100vw" }}>
+            <Box sx={{ display: "flex", justifyContent: "center", marginLeft: "62px" }}>
+                <Card sx={{ display: "flex", flexDirection: "column", textAlign: "center", marginTop: "100px", width: "1100px", boxShadow: "0 15px 30px rgba(0, 0, 0, 0.1)" }}>
+                    <Button sx={{ width: "120px", height: "30px" }} variant="contained" onClick={goBack}><ArrowBackIcon fontSize='small' /> Go back</Button>
 
 
-                <Box sx={{ margin: "50px 0 0" }}>
-                    <Typography variant='h3'>Update your bank details here</Typography>
-                </Box>
-
-                <Form onSubmit={handleBankUpdate}>
-                    <Box
-                        // component="form"
-                        sx={{
-                            p: 5,
-                            '& > :not(style)': { m: 1, width: '25ch' },
-                        }}
-                        noValidate
-                        autoComplete="off"
-                    >
-
-                        <TextField id="userId" label="Name" onChange={(e) => handleEdit(e)} required={true} variant="outlined" value={BankEdit.userId} />
-                        <TextField id="title" label="Branch" onChange={(e) => handleEdit(e)} required={true} variant="outlined" value={BankEdit.title} />
-                        <TextField id="body" label="Account Holder" onChange={(e) => handleEdit(e)} required={true} variant="outlined" value={BankEdit.body} />
-                        <TextField id="userId" label="Account Number" onChange={(e) => handleEdit(e)} required={true} variant="outlined" value={BankEdit.userId} />
-                        <TextField id="title" label="Address" onChange={(e) => handleEdit(e)} required={true} variant="outlined" value={BankEdit.title} />
-                        <TextField id="body" label="Branch Code" onChange={(e) => handleEdit(e)} required={true} variant="outlined" value={BankEdit.body} />
-                        <TextField id="userId" label="IFSC Code" onChange={(e) => handleEdit(e)} required={true} variant="outlined" value={BankEdit.userId} />
-                        <TextField id="title" label="Swift" onChange={(e) => handleEdit(e)} required={true} variant="outlined" value={BankEdit.title} />
-
-
+                    <Box sx={{ p: 1 }}>
+                        <Typography sx={{ fontSize: { xs: 15, sm: 25, md: 25, lg: 30, xl: 35 } }}>Update your bank details here</Typography>
                     </Box>
-                    <Button variant='contained' type="submit">Submit</Button>
-                </Form>
 
-            </Card>
+                    <Form onSubmit={handleBankUpdate}>
+                        <Box
+                            // component="form"
+                            sx={{
+                                '& > :not(style)': { m: 1, width: { xs: 125, sm: 130, md: 150, lg: 180, xl: 200, } },
+                            }}
+                            noValidate
+                            autoComplete="off"
+                        >
+
+                            <TextField id="userId" label="Name" size="small" onChange={(e) => handleEdit(e)} required={true} variant="outlined" value={BankEdit.userId} />
+                            <TextField id="title" label="Branch" size="small" onChange={(e) => handleEdit(e)} required={true} variant="outlined" />
+                            <TextField id="body" label="Account Holder" size="small" onChange={(e) => handleEdit(e)} required={true} variant="outlined" />
+                            <TextField id="userId" label="Account Number"  size="small"onChange={(e) => handleEdit(e)} required={true} variant="outlined" />
+                            <TextField id="title" label="Address" size="small" multiline maxRows={4} onChange={(e) => handleEdit(e)} required={true} variant="outlined" />
+                            <TextField id="body" label="Branch Code" size="small" onChange={(e) => handleEdit(e)} required={true} variant="outlined" />
+                            <TextField id="userId" label="IFSC Code" size="small" onChange={(e) => handleEdit(e)} required={true} variant="outlined" />
+                            <TextField id="title" label="Swift" size="small" onChange={(e) => handleEdit(e)} required={true} variant="outlined" />
+
+
+                        </Box>
+                        <Button variant='contained' type="submit">Submit</Button>
+                    </Form>
+
+                </Card>
+            </Box>
         </Box>
     );
 };

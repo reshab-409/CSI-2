@@ -75,7 +75,7 @@ function Auth() {
 
     // onsubmit function for login page
     const onSubmitForLoginPage = (data) => {
-        axios.post('http://localhost:5002/user/login', data).then((res) => {
+        axios.post('http://localhost:4001/login', data).then((res) => {
             window.localStorage.setItem("IniIn", true);
             dispatch(authActions.Login());
 
