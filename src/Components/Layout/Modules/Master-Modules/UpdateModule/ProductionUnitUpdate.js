@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 import TextField from '@mui/material/TextField';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import InputAdornment from '@mui/material/InputAdornment';
 import { Form } from 'semantic-ui-react';
 import axios from 'axios';
 
@@ -63,9 +64,21 @@ const ProductionUnitUpdate = () => {
                         autoComplete="off"
                     >
 
-                        <TextField id="ProductionUnit Nmae" label="ProductionUnit Name" size="small" onChange={(e) => handleEdit(e)} required={true} variant="outlined" value={ProductionUnitEdit.ProductionUnitName} />
-                        <TextField id="Account Details" label="Accont Details" size="small" multiline maxRows={4} onChange={(e) => handleEdit(e)} required={true} variant="outlined" value={ProductionUnitEdit.AccountDetails} />
-                        <TextField id="Address" label="Address" size="small" multiline maxRows={4} onChange={(e) => handleEdit(e)} required={true} variant="outlined" value={ProductionUnitEdit.Address} />
+                        <TextField id="Name" onChange={(e) => handleEdit(e)} required={true} size="small" label="Name *" variant="outlined" />
+                        <TextField id="PNumber" onChange={(e) => handleEdit(e)} required={true} size="small" InputProps={{ startAdornment: <InputAdornment position="start">+ 91</InputAdornment>, }} label="Phone Number" variant="outlined" />
+                        <TextField id="Email" onChange={(e) => handleEdit(e)} required={true} size="small" label="Email" variant="outlined" />
+                        <TextField id="GST No" onChange={(e) => handleEdit(e)} required={true} size="small" label="GST No" variant="outlined" />
+                        <TextField id="PAN No" onChange={(e) => handleEdit(e)} label="PAN No" size="small" variant="outlined" />
+                        <TextField id="Street One" onChange={(e) => handleEdit(e)} required={true} size="small" label="Street One" variant="outlined" />
+                        <TextField id="Street Two" onChange={(e) => handleEdit(e)} required={true} size="small" label="Street Two" variant="outlined" />
+                        <TextField id="City" onChange={(e) => handleEdit(e)} required={true} size="small" label="City" variant="outlined" />
+                        <TextField id="Pin Code" onChange={(e) => handleEdit(e)} required={true} size="small" label="Pin Code" variant="outlined" />
+                        <TextField id="State" onChange={(e) => handleEdit(e)} required={true} size="small" label="State" variant="outlined" />
+                        <TextField id="Country" onChange={(e) => handleEdit(e)} required={true} size="small" label="Country" variant="outlined" />
+                        <TextField id="FAX No" onChange={(e) => handleEdit(e)} required={true} size="small" label="FAX No" variant="outlined" />
+                        <TextField id="Attn" onChange={(e) => handleEdit(e)} required={true} size="small" label="Attn" variant="outlined" />
+                        <TextField id="Website" onChange={(e) => handleEdit(e)} required={true} size="small" label="Website" variant="outlined" />
+                        <TextField id="Currency" onChange={(e) => handleEdit(e)} required={true} size="small" InputProps={{ startAdornment: <InputAdornment position="start">INR</InputAdornment>, }} label="Currency" variant="outlined" />
 
                     </Box>
                     <Button variant='contained' type="submit">Submit</Button>

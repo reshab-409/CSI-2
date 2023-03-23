@@ -50,26 +50,98 @@ const columns = [
     {
         field: 'id',
         headerName: 'ID',
-        width: 90,
+        width: 40,
         type: 'number'
     },
     {
-        field: 'UnitId',
-        headerName: 'UnitId',
-        width: 250,
+        field: 'Name',
+        headerName: 'Name',
+        width: 150,
         type: 'number',
         editable: false
     },
     {
-        field: 'title',
-        headerName: 'Title',
-        width: 250,
+        field: 'Pnumber',
+        headerName: 'Phone Number',
+        width: 150,
         editable: false
     },
     {
-        field: 'body',
-        headerName: 'Body',
-        width: 550,
+        field: 'Email',
+        headerName: 'Email',
+        width: 150,
+        editable: false
+    },
+    {
+        field: 'GST No',
+        headerName: 'GST No',
+        width: 150,
+        editable: false
+    },
+    {
+        field: 'PAN No',
+        headerName: 'PAN No',
+        width: 150,
+        editable: false
+    },
+    {
+        field: 'Street one',
+        headerName: 'Street one',
+        width: 150,
+        editable: false
+    },
+    {
+        field: 'Street two',
+        headerName: 'Street two',
+        width: 150,
+        editable: false
+    },
+    {
+        field: 'City',
+        headerName: 'City',
+        width: 150,
+        editable: false
+    },
+    {
+        field: 'Pin code',
+        headerName: 'Pin code',
+        width: 150,
+        editable: false
+    },
+    {
+        field: 'State',
+        headerName: 'State',
+        width: 150,
+        editable: false
+    },
+    {
+        field: 'Country',
+        headerName: 'Country',
+        width: 150,
+        editable: false
+    },
+    {
+        field: 'FAX No',
+        headerName: 'FAX No',
+        width: 150,
+        editable: false
+    },
+    {
+        field: 'Attn',
+        headerName: 'Attn',
+        width: 150,
+        editable: false
+    },
+    {
+        field: 'Website',
+        headerName: 'Website',
+        width: 150,
+        editable: false
+    },
+    {
+        field: 'Currency',
+        headerName: 'Currency',
+        width: 150,
         editable: false
     },
     {
@@ -146,7 +218,6 @@ export default function ProductionUnit() {
                             columns={columns}
                             pageSize={6}
                             rowsPerPageOptions={[6]}
-                            checkboxSelection
                             disableSelectionOnClick
                             experimentalFeatures={{ newEditingApi: true }}
                         />
@@ -188,9 +259,6 @@ export default function ProductionUnit() {
                                 <TextField id="Attn" onChange={(e) => handleEdit(e)} required={true}  size="small" label="Attn" variant="outlined" />
                                 <TextField id="Website" onChange={(e) => handleEdit(e)} required={true}  size="small" label="Website" variant="outlined" />
                                 <TextField id="Currency" onChange={(e) => handleEdit(e)} required={true}  size="small" InputProps={{ startAdornment: <InputAdornment position="start">INR</InputAdornment>, }} label="Currency" variant="outlined" />
-
-
-
                             </Box>
 
                             <Button variant='contained' type="submit">Add</Button>

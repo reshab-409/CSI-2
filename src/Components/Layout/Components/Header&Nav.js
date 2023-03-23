@@ -199,6 +199,18 @@ export default function NavDrawer() {
     const Goto7 = () => {
         navigate("/ProductionUnitMaster")
     };
+    const Goto8 = () => {
+        navigate("/Stock")
+    };
+    const Goto9 = () => {
+        navigate("/onHoldStock")
+    };
+    const Goto10 = () => {
+        navigate("/ProductionStock")
+    };
+    const Goto11 = () => {
+        navigate("/WorkOrder")
+    };
     return (
         <>
             {/* NavBar  */}
@@ -340,7 +352,7 @@ export default function NavDrawer() {
                                     </ListItemIcon>
                                     <ListItemText primary="Vendor Master" />
                                 </ListItemButton>
-                                <ListItemButton sx={{ pl: 4 }}  onClick={Goto3} >
+                                <ListItemButton sx={{ pl: 4 }} onClick={Goto3} >
                                     <ListItemIcon>
                                         <StarBorder />
                                     </ListItemIcon>
@@ -378,19 +390,19 @@ export default function NavDrawer() {
                         </ListItemButton>
                         <Collapse in={open2} timeout="auto" unmountOnExit>
                             <List component="div" disablePadding>
-                                <ListItemButton sx={{ pl: 4 }}>
+                                <ListItemButton sx={{ pl: 4 }} onClick={Goto8}>
                                     <ListItemIcon>
                                         <StarBorder />
                                     </ListItemIcon>
                                     <ListItemText primary="Stock" />
                                 </ListItemButton>
-                                <ListItemButton sx={{ pl: 4 }}>
+                                <ListItemButton sx={{ pl: 4 }} onClick={Goto9}>
                                     <ListItemIcon>
                                         <StarBorder />
                                     </ListItemIcon>
                                     <ListItemText primary="On Hold Stock" />
                                 </ListItemButton>
-                                <ListItemButton sx={{ pl: 4 }}>
+                                <ListItemButton sx={{ pl: 4 }} onClick={Goto10}>
                                     <ListItemIcon>
                                         <StarBorder />
                                     </ListItemIcon>
@@ -404,36 +416,9 @@ export default function NavDrawer() {
                                 <InboxIcon />
                             </ListItemIcon>
                             <ListItemText primary="Production Module" />
-                            {open3 ? <ExpandLess /> : <ExpandMore />}
                         </ListItemButton>
-                        <Collapse in={open3} timeout="auto" unmountOnExit>
-                            <List component="div" disablePadding>
-                                <ListItemButton sx={{ pl: 4 }}>
-                                    <ListItemIcon>
-                                        <StarBorder />
-                                    </ListItemIcon>
-                                    <ListItemText primary="Starred" />
-                                </ListItemButton>
-                            </List>
-                        </Collapse>
 
-                        <ListItemButton onClick={handleClick3}>
-                            <ListItemIcon>
-                                <InboxIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Quotation Module" />
-                            {open4 ? <ExpandLess /> : <ExpandMore />}
-                        </ListItemButton>
-                        <Collapse in={open4} timeout="auto" unmountOnExit>
-                            <List component="div" disablePadding>
-                                <ListItemButton sx={{ pl: 4 }}>
-                                    <ListItemIcon>
-                                        <StarBorder />
-                                    </ListItemIcon>
-                                    <ListItemText primary="Starred" />
-                                </ListItemButton>
-                            </List>
-                        </Collapse>
+
 
                         <ListItemButton onClick={handleClick4}>
                             <ListItemIcon>
@@ -448,7 +433,13 @@ export default function NavDrawer() {
                                     <ListItemIcon>
                                         <StarBorder />
                                     </ListItemIcon>
-                                    <ListItemText primary="Starred" />
+                                    <ListItemText primary="Purchase Entry" />
+                                </ListItemButton>
+                                <ListItemButton sx={{ pl: 4 }}>
+                                    <ListItemIcon>
+                                        <StarBorder />
+                                    </ListItemIcon>
+                                    <ListItemText primary="RFQ" />
                                 </ListItemButton>
                             </List>
                         </Collapse>
@@ -470,11 +461,35 @@ export default function NavDrawer() {
                         </ListItemButton>
                         <Collapse in={open6} timeout="auto" unmountOnExit>
                             <List component="div" disablePadding>
+                                <ListItemButton sx={{ pl: 4 }} onClick={Goto11}>
+                                    <ListItemIcon>
+                                        <StarBorder />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Work Order" />
+                                </ListItemButton>
                                 <ListItemButton sx={{ pl: 4 }}>
                                     <ListItemIcon>
                                         <StarBorder />
                                     </ListItemIcon>
-                                    <ListItemText primary="Starred" />
+                                    <ListItemText primary="Proforma Invoice" />
+                                </ListItemButton>
+                                <ListItemButton sx={{ pl: 4 }}>
+                                    <ListItemIcon>
+                                        <StarBorder />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Invoice" />
+                                </ListItemButton>
+                                <ListItemButton sx={{ pl: 4 }}>
+                                    <ListItemIcon>
+                                        <StarBorder />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Delivery Note" />
+                                </ListItemButton>
+                                <ListItemButton sx={{ pl: 4 }}>
+                                    <ListItemIcon>
+                                        <StarBorder />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Quotation" />
                                 </ListItemButton>
                             </List>
                         </Collapse>
@@ -484,18 +499,7 @@ export default function NavDrawer() {
                                 <InboxIcon />
                             </ListItemIcon>
                             <ListItemText primary="Expence Module" />
-                            {open7 ? <ExpandLess /> : <ExpandMore />}
                         </ListItemButton>
-                        <Collapse in={open7} timeout="auto" unmountOnExit>
-                            <List component="div" disablePadding>
-                                <ListItemButton sx={{ pl: 4 }}>
-                                    <ListItemIcon>
-                                        <StarBorder />
-                                    </ListItemIcon>
-                                    <ListItemText primary="Starred" />
-                                </ListItemButton>
-                            </List>
-                        </Collapse>
 
                         <ListItemButton onClick={handleClick7}>
                             <ListItemIcon>
@@ -510,7 +514,13 @@ export default function NavDrawer() {
                                     <ListItemIcon>
                                         <StarBorder />
                                     </ListItemIcon>
-                                    <ListItemText primary="Starred" />
+                                    <ListItemText primary="Sale Invoice" />
+                                </ListItemButton>
+                                <ListItemButton sx={{ pl: 4 }}>
+                                    <ListItemIcon>
+                                        <StarBorder />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Purchase Invoice" />
                                 </ListItemButton>
                             </List>
                         </Collapse>
@@ -520,36 +530,13 @@ export default function NavDrawer() {
                                 <InboxIcon />
                             </ListItemIcon>
                             <ListItemText primary="Bank Management" />
-                            {open9 ? <ExpandLess /> : <ExpandMore />}
                         </ListItemButton>
                         <Collapse in={open9} timeout="auto" unmountOnExit>
                             <List component="div" disablePadding>
-                                <ListItemButton sx={{ pl: 4 }}>
-                                    <ListItemIcon>
-                                        <StarBorder />
-                                    </ListItemIcon>
-                                    <ListItemText primary="Starred" />
-                                </ListItemButton>
                             </List>
                         </Collapse>
 
-                        <ListItemButton onClick={handleClick9}>
-                            <ListItemIcon>
-                                <InboxIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Cost Calculator" />
-                            {open10 ? <ExpandLess /> : <ExpandMore />}
-                        </ListItemButton>
-                        <Collapse in={open10} timeout="auto" unmountOnExit>
-                            <List component="div" disablePadding>
-                                <ListItemButton sx={{ pl: 4 }}>
-                                    <ListItemIcon>
-                                        <StarBorder />
-                                    </ListItemIcon>
-                                    <ListItemText primary="Starred" />
-                                </ListItemButton>
-                            </List>
-                        </Collapse>
+
 
                         <Divider />
 
